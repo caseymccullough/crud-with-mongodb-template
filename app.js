@@ -6,7 +6,10 @@ const mongoose = require('mongoose'); // for models
 // if you are accessing from multiple servers. . . ? 
 const cors = require('cors');
 
-require('dotenv/config');
+require('dotenv/config'); 
+   /* injects all environment variables from the .env file into
+   the process.env object
+*/
 
 // MIDDLEWARE (good place for auth)
 app.use(express.json());
@@ -23,7 +26,6 @@ app.use('/posts', postsRoute); // middleware--when you get posts, user postsRout
 app.get('/', (req, res) => {
    res.send('We are on Home');
 });
-
 
 mongoose.set('debug', true);
 // Connect to DB

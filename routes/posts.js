@@ -7,7 +7,6 @@ router.get('/', async (req, res) => {
    try{
          const posts = await Post.find(); // here we could return a given # or engage in many options with a .method() after find
          res.json(posts);
-         console.log ("inside of try block in get()")
    }catch(err) {
       res.json({ disaster: err});
    }
@@ -18,7 +17,8 @@ router.post('/', async (req, res) => {
    try {     
       const post = await new Post ({
          title: req.body.title,
-         description: req.body.description
+         description: req.body.description,
+         
       });
       const createdPost = await Post.create(post);
 
@@ -40,6 +40,7 @@ router.get('/:postId', async (req, res) => {
    }
 });
 
+// DELETE POST
 router.delete('/:postId', async (req, res) => {
    try{
       const removedPost = await Post.findByIdAndDelete(req.params.postId);
@@ -55,7 +56,7 @@ router.patch('/:postId', async (req, res) => {
    try{
       const updatedPost = await Post.updateOne(
          {_id: req.params.postId},
-         { $set: { title: req.body.title }}
+         { $set: { description: req.body.description }}
       );
       res.json(updatedPost);
    }catch (err){
